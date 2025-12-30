@@ -1,0 +1,82 @@
+﻿[START] Checking initial orbit conditions...
+[CHECK] Initial orbit periapsis altitude: 57.85 km
+[CHECK] Initial orbit periapsis is safe.
+[LOAD] Loading MarsGRAM atmosphere from 'C:\Users\savit\OneDrive\Documents\AerospaceResearch\Code\GRAM_Suite_2.1.0\Outputs\myref_OUTPUT.csv'
+[INFO] Built rho(h) from 'C:\Users\savit\OneDrive\Documents\AerospaceResearch\Code\GRAM_Suite_2.1.0\Outputs\myref_OUTPUT.csv' (alts 0.01-65.00 km, clamp 0.05).
+
+[PASS 1] Starting pass with initial altitude 130.00 km and initial velocity of 4800.00 m/s
+[DEBUG] Step 0: t=0.5s, Altitude=130.00 km, Entered=False
+[INFO] Atmosphere entry detected at t=142.5s, altitude=65.97 km
+[INFO] Atmosphere exit detected at t=294.0s, altitude=66.09 km
+[RESULTS] Pass 1: peak g-load = 0.39 g, delta-v removed = 186.2 m/s, peak q = 0.3 kPa
+[ORBIT] New periapsis altitude after pass 1: 57.519 km
+[INFO] Wrote 589 points to 'TRAJDATA_allpasses.txt'
+[INFO] Wrote last-pass snippet (58 points) to 'TRAJDATA_lastpass.txt'
+[INFO] ref_input template written to 'C:\Users\savit\Earth-GRAM\ref_input_generated.txt' (edit paths for your system)
+[INFO] Running MarsGRAM with input file: C:\Users\savit\Earth-GRAM\ref_input_generated.txt
+[INFO] Built rho(h) from 'C:\Users\savit\OneDrive\Documents\AerospaceResearch\Code\GRAM_Suite_2.1.0\Outputs\myref_OUTPUT.csv' (alts 0.01-65.00 km, clamp 0.05).
+
+[PASS 2] Starting pass with initial altitude 66.20 km and initial velocity of 4660.26 m/s
+[DEBUG] Step 0: t=0.5s, Altitude=66.20 km, Entered=False
+[DEBUG] Step 10000: t=5000.5s, Altitude=8383.33 km, Entered=False
+[DEBUG] Step 20000: t=10000.5s, Altitude=14174.63 km, Entered=False
+[DEBUG] Step 30000: t=15000.5s, Altitude=17603.40 km, Entered=False
+[DEBUG] Step 40000: t=20000.5s, Altitude=19268.63 km, Entered=False
+[DEBUG] Step 50000: t=25000.5s, Altitude=19384.58 km, Entered=False
+[DEBUG] Step 60000: t=30000.5s, Altitude=17964.71 km, Entered=False
+[DEBUG] Step 70000: t=35000.5s, Altitude=14831.34 km, Entered=False
+[DEBUG] Step 80000: t=40000.5s, Altitude=9469.78 km, Entered=False
+[DEBUG] Step 90000: t=45000.5s, Altitude=867.84 km, Entered=False
+[INFO] Atmosphere entry detected at t=45768.0s, altitude=65.91 km
+[INFO] Atmosphere exit detected at t=45942.5s, altitude=66.07 km
+[RESULTS] Pass 2: peak g-load = 0.38 g, delta-v removed = 222.2 m/s, peak q = 0.3 kPa
+[ORBIT] New periapsis altitude after pass 2: 56.864 km
+[INFO] Wrote 92475 points to 'TRAJDATA_allpasses.txt'
+[INFO] Wrote last-pass snippet (9247 points) to 'TRAJDATA_lastpass.txt'
+[INFO] ref_input template written to 'C:\Users\savit\Earth-GRAM\ref_input_generated.txt' (edit paths for your system)
+[INFO] Running MarsGRAM with input file: C:\Users\savit\Earth-GRAM\ref_input_generated.txt
+[INFO] Built rho(h) from 'C:\Users\savit\OneDrive\Documents\AerospaceResearch\Code\GRAM_Suite_2.1.0\Outputs\myref_OUTPUT.csv' (alts 0.01-65.00 km, clamp 0.05).
+
+[PASS 3] Starting pass with initial altitude 66.17 km and initial velocity of 4437.90 m/s
+[DEBUG] Step 0: t=0.5s, Altitude=66.17 km, Entered=False
+[DEBUG] Step 10000: t=5000.5s, Altitude=6562.38 km, Entered=False
+[DEBUG] Step 20000: t=10000.5s, Altitude=9352.63 km, Entered=False
+[DEBUG] Step 30000: t=15000.5s, Altitude=8235.11 km, Entered=False
+[DEBUG] Step 40000: t=20000.5s, Altitude=2780.06 km, Entered=False
+[INFO] Atmosphere entry detected at t=22086.0s, altitude=65.93 km
+[INFO] Atmosphere exit detected at t=22298.5s, altitude=66.05 km
+[RESULTS] Pass 3: peak g-load = 0.37 g, delta-v removed = 253.7 m/s, peak q = 0.3 kPa
+[ORBIT] New periapsis altitude after pass 3: 55.827 km
+[INFO] Wrote 137073 points to 'TRAJDATA_allpasses.txt'
+[INFO] Wrote last-pass snippet (13707 points) to 'TRAJDATA_lastpass.txt'
+[INFO] ref_input template written to 'C:\Users\savit\Earth-GRAM\ref_input_generated.txt' (edit paths for your system)
+[INFO] Running MarsGRAM with input file: C:\Users\savit\Earth-GRAM\ref_input_generated.txt
+[INFO] Built rho(h) from 'C:\Users\savit\OneDrive\Documents\AerospaceResearch\Code\GRAM_Suite_2.1.0\Outputs\myref_OUTPUT.csv' (alts 0.01-65.00 km, clamp 0.05).
+
+[PASS 4] Starting pass with initial altitude 66.14 km and initial velocity of 4184.03 m/s
+[DEBUG] Step 0: t=0.5s, Altitude=66.14 km, Entered=False
+[DEBUG] Step 10000: t=5000.5s, Altitude=4368.45 km, Entered=False
+[DEBUG] Step 20000: t=10000.5s, Altitude=3024.63 km, Entered=False
+[INFO] Atmosphere entry detected at t=12995.5s, altitude=66.00 km
+[INFO] Atmosphere exit detected at t=13296.0s, altitude=66.05 km
+[RESULTS] Pass 4: peak g-load = 0.39 g, delta-v removed = 340.9 m/s, peak q = 0.3 kPa
+[ORBIT] New periapsis altitude after pass 4: 53.335 km
+[INFO] Wrote 163666 points to 'TRAJDATA_allpasses.txt'
+[INFO] Wrote last-pass snippet (16366 points) to 'TRAJDATA_lastpass.txt'
+[INFO] ref_input template written to 'C:\Users\savit\Earth-GRAM\ref_input_generated.txt' (edit paths for your system)
+[INFO] Running MarsGRAM with input file: C:\Users\savit\Earth-GRAM\ref_input_generated.txt
+[INFO] Built rho(h) from 'C:\Users\savit\OneDrive\Documents\AerospaceResearch\Code\GRAM_Suite_2.1.0\Outputs\myref_OUTPUT.csv' (alts 0.01-65.00 km, clamp 0.05).
+
+[PASS 5] Starting pass with initial altitude 66.11 km and initial velocity of 3842.69 m/s
+[DEBUG] Step 0: t=0.5s, Altitude=66.11 km, Entered=False
+[DEBUG] Step 10000: t=5000.5s, Altitude=1390.03 km, Entered=False
+[INFO] Atmosphere entry detected at t=7848.0s, altitude=65.99 km
+[WARN] Planetary impact detected (r <= R_MARS). Terminating pass.
+[RESULTS] Pass 5: peak g-load = 4.17 g, delta-v removed = 3198.5 m/s, peak q = 3.3 kPa
+[ORBIT] New periapsis altitude after pass 5: -3316.108 km
+[SUCCESS] Target periapsis 2.0 km reached after pass 5. Final velocity was 766.29 m/s.
+[INFO] Wrote 180485 points to 'TRAJDATA_allpasses.txt'
+[INFO] Wrote last-pass snippet (18048 points) to 'TRAJDATA_lastpass.txt'
+[INFO] Total simulation time: 1504.00 minutes (90240.0 seconds)
+[INFO] Number of passes simulated: 5
+[DONE] Multi-pass aerobraking simulation completed. Drawing trajectory around Mars.
