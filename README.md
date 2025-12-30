@@ -1,2 +1,2 @@
-# Aerobraking-Research
-Repository with code for research done on feasability of aerobraking.
+#Abstract
+Landing spacecraft on Mars presents great challenges due to the negligible atmosphere, rendering conventional atmospheric deceleration less effective than on Earth and requiring immense energy. Aerobraking offers high potential by reducing fuel consumption through atmospheric drag, enabling efficient missions. This work assesses the feasibility of crewed surface insertion on Mars via aerobraking.
