@@ -23,9 +23,9 @@ CONFIG = {
     'fpa': -8,                  # Injection Flight Path Angle (in degrees); normally between ~7.5 - 8.5 degrees
     'az': 90.0,                 # Azimuth (Used to set velocity vector)
     'G_REF': 3.721,             # Mars gravity reference (in m/s^2)
-    'target_perigee_km': 2.0,   # Final desired perigee alittude (in km)
+    'target_perigee_km': 2.0,   # Final desired perigee altitude (in km)
     'max_passes': 200,          # Maximum passes through orbit before termination due to computational limitations
-    'dt': 0.5,                  # Propogation delta-time (in seconds)
+    'dt': 0.5,                  # Propagation delta-time (in seconds)
     'g_limit': 7.0,             # Abort with peak g-load (Force)
     'q_limit': 6e4,             # Abort with peak q-load (Dynamic Pressure)
     'burn_location': 'apoapsis' # Location for retrograde delta-v
@@ -57,7 +57,7 @@ def enu_basis(lat_rad, lon_rad):
 
 def build_initial_state(lat_deg, lon_deg, alt_m, speed_m_s, fpa_deg, azimuth_deg):
     # Function 1.2: Converts into 3D position+velocity vectors in Mars-centered frame.
-    # Assumes that spacecraft velocity is purely intertial (like incoming from interplanetary transfer) 
+    # Assumes that spacecraft velocity is purely inertial (like incoming from interplanetary transfer) 
     lat = math.radians(lat_deg)
     lon = math.radians(lon_deg)
     rmag = R_MARS + alt_m
@@ -82,7 +82,7 @@ def cartesian_to_geo(r):
     return math.degrees(lat), math.degrees(lon), h
 
 def geo_to_cartesian(lat, lon, alt):
-    # Function 1.4: Reverts back Geographical coordinates to Cartesian.
+    # Function 1.4: Reverts Geographical coordinates to Cartesian.
     lat = np.radians(lat)
     lon = np.radians(lon)
     r = R_MARS + alt * 1000.0
@@ -92,8 +92,8 @@ def geo_to_cartesian(lat, lon, alt):
     return x, y, z
 
 def orbital_elements(r, v):
-    # Function 1.5: Computates orbitial elemants from radius and velocity vectors using Keplerian orbital formulas.
-    # Assumes Mars as point mass.
+    # Function 1.5: Computes orbital elements from radius and velocity vectors using Keplerian orbital formulas.
+    # Assumes Mars as a point mass.
     rvec = np.array(r)
     vvec = np.array(v)
     rmag = np.linalg.norm(rvec)
@@ -115,7 +115,6 @@ def read_marsgram_csv_robust(csv_path, rho_clamp_max=0.05, rho_floor=1e-14, n_fi
     # Function 1.6: Reads MarsGram-outputted CSV with extrapolation methods to discern atmospheric densities
     df = pd.read_csv(csv_path)
     cols_low = [c.lower() for c in df.columns]
-    
     alt_col = None
     for cand in ['height_km','height(km)','height','alt_km','altitude_km','alt']:
         if cand in cols_low:
@@ -123,19 +122,15 @@ def read_marsgram_csv_robust(csv_path, rho_clamp_max=0.05, rho_floor=1e-14, n_fi
             break
     if alt_col is None:
         raise RuntimeError("[ERROR]: Cannot find altitude column in MarsGRAM CSV.")
-    
     rho_col = None
     for cand in ['density_kgm3','density(kg/m3)','density','rho','density_kg/m3']:
         if cand in cols_low:
             rho_col = df.columns[cols_low.index(cand)]
             break
-
     if rho_col is None:
         raise RuntimeError("[ERROR]: Cannot find density column in MarsGRAM CSV.")
-
     alt_km = df[alt_col].astype(float).values
     rho_vals = df[rho_col].astype(float).values
-    
     unique_alts, inv = np.unique(alt_km, return_inverse=True)
     rho_mean = np.zeros_like(unique_alts, dtype=float)
     for i,ua in enumerate(unique_alts):
@@ -144,7 +139,6 @@ def read_marsgram_csv_robust(csv_path, rho_clamp_max=0.05, rho_floor=1e-14, n_fi
     alt_km_sorted = unique_alts[order]
     rho_sorted = rho_mean[order]
     interp = interp1d(alt_km_sorted, rho_sorted, kind='linear', bounds_error=False, fill_value='extrapolate')
-    
     fit_n = min(n_fit, len(alt_km_sorted))
     bottom_alts = alt_km_sorted[:fit_n]
     bottom_rhos = rho_sorted[:fit_n]
@@ -192,14 +186,14 @@ def check_initial_orbit(lat, lon, alt_km, speed, fpa, az):
         print("[CHECK] Initial orbit periapsis is safe.")
     return r0, v0, rp_km
 
-# Propogator Functions (2)
+# Propagator Functions (2)
 def drag_acceleration(r, v, rho_func, cd=CD, area=AREA, mass=MASS):
     # Function 2.1: Calculates drag using state vectors
-    # Assumes identical velocity for surface and atmosphere (First-order model so ignores winds); ignores hypersonic effects; and no lift or pitching accounted
+    # Assumes identical velocity for surface and atmosphere (First-order model, so it ignores winds); ignores hypersonic effects; and no lift or pitching is accounted for
     omega_vec = np.array([0.0, 0.0, OMEGA_MARS]) # Converts angular velocity to a vector
     v_atm = np.cross(omega_vec, r)               # Cross product between omega and r to get velocity of surface
     v_rel = v - v_atm                            # Relative speed of spacecraft to surface
-    vrel_norm = np.linalg.norm(v_rel)            # Normalize vector to only get direction
+    vrel_norm = np.linalg.norm(v_rel)            # Normalize vector only to get direction
     if vrel_norm <= 1e-9:
         return np.zeros(3), 0.0, 0.0
     h = np.linalg.norm(r) - R_MARS
@@ -212,8 +206,8 @@ def drag_acceleration(r, v, rho_func, cd=CD, area=AREA, mass=MASS):
 
 def dynamics(t, y, rho_func):
     # Function 2.2: Gets time derivative from state vectors (radius + velocity) with drag and gravity
-    r = y[:3]                                    # Gets first three elemants in radius vector (x,y,z)
-    v = y[3:]                                    # Gets first three elemants in velocity vector (vx, vy, vz)
+    r = y[:3]                                    # Gets first three elements in radius vector (x,y,z)
+    v = y[3:]                                    # Gets first three elements in velocity vector (vx, vy, vz)
     rnorm = np.linalg.norm(r)                    # Gets total distance from Mars' center
     a_drag, _, _ = drag_acceleration(r, v, rho_func) # Gets acceleration due to drag
     a_grav = -MU_MARS * r / (rnorm**3)           # Gets acceleration due to gravity
@@ -222,7 +216,7 @@ def dynamics(t, y, rho_func):
 
 def rk4_step(t, y, dt, rho_func):
     # Function 2.3: Advances state vectors every [dt] step using 4th order Runge-Kutta method
-    # Used rather than a simple Euler's method for higher acccuracy 
+    # Used rather than a simple Euler's method for higher accuracy 
     k1 = dynamics(t, y, rho_func)
     k2 = dynamics(t + dt/2, y + dt * k1 / 2, rho_func)
     k3 = dynamics(t + dt/2, y + dt * k2 / 2, rho_func)
@@ -232,7 +226,7 @@ def rk4_step(t, y, dt, rho_func):
 
 
 def propagate_single_pass(r0, v0, rho_func, dt=0.1, atm_entry_h=66e3, atm_exit_h=66e3, max_steps=1000000):
-    # Function 2.4: Uses other helper function to simulate one aerbraking pass through atmosphere
+    # Function 2.4: Uses other helper functions to simulate one aerobraking pass through the atmosphere
     times = [0.0]
     rs = [r0.copy()]
     vs = [v0.copy()]
@@ -342,7 +336,7 @@ def run_marsgram(ref_input_path, marsgram_exe_path):
 
 # Visualization Functions (3)
 def plot_altitude_vs_time(times, positions):
-    # Function 3.1: Graphs altitude vs time for entire duration of aerobraking
+    # Function 3.1: Graph altitude vs time for entire duration of aerobraking
     altitudes_km = [(np.linalg.norm(r) - R_MARS)/1000.0 for r in positions]
     plt.figure(figsize=(10,6))
     plt.plot(np.array(times)/60.0, altitudes_km, label='Altitude (km)')
@@ -397,7 +391,7 @@ def draw_trajectory(traj_all_file):
     plt.show()
 
 def multi_pass_aerobrake(cfg):
-    # Main function that combines all others to run full multi-pass aerobraking simulation
+    # Main function that combines all others to run a full multi-pass aerobraking simulation
     lat0 = cfg['lat0']
     lon0 = cfg['lon0']
     alt0_km = cfg['alt0_km']
@@ -530,4 +524,5 @@ Sources for programming:
   - Pandas
   - SciPy
 """
+
 
